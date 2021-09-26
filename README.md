@@ -128,14 +128,16 @@
   "id": 111111111,
   "name": "string",
   "html_url": "<url string>",
+  "homepage": "<url string>",
   "description": "string",
+  "topics": ["string"],
   "contents_url": "string",
   "created_at": "2021-09-19T20:27:19Z",
   "has_pages": true
 }
 ```
 
-## rule
+## Rules
 
 - DESCRIPTION
 
@@ -146,15 +148,23 @@ Difficulty : "",
 Challenge : "",
 ```
 
-> read this string, parse it and
+> NAME : string
+> DESCRIPTION : string to show in card
+> DIFFICULTY : number, string
+> CHALLENGE : ulr to challenge
 
 ## what data can i show on UI ?
 
-1. name of challenge `description` based on rule
-2. difficulty of challenge `description` based on rule
+1. name of challenge `description` based on rules
+2. difficulty of challenge `description` based on rules
    1. level (0,1,2,...)
    2. name
 3. ulr for repo `html_url`
 4. date `created_at`
-5. live demo [ check for `has_pages`, construct url based on rule]
+5. live demo [ check for `has_pages`, `homepage`]
 6. image [`/repos/{owner}/{repo}/contents/{path}` from `contents_url`] will be used to fetch image for challenge
+7. topics from `topics`
+
+## TODO
+
+- take github api and store in context
