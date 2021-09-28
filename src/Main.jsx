@@ -43,7 +43,7 @@ export const Main = () => {
 
   return (
     <main>
-      <Wrapper className="flex flex-col md:flex-row md:flex-wrap">
+      <Wrapper className="flex flex-col md:flex-row md:flex-wrap md:justify-center md:items-stretch">
         {DATA.length ? DATA.map((repo, i) => <Card repo={repo} key={i} />) : null}
       </Wrapper>
     </main>

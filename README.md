@@ -170,10 +170,9 @@ Challenge : "",
 - added images to repos
 - added description to repos
 - added topics to repos
-
 - repos should now contain all the information i need to start rendering on client side
+- beautified the cards
+- added code and live demo links
 
-> I SOMEHOW BLEW UP THE API LAST NIGHT
-> IT RAN INTO A RECURSIVE CALL TO GITHUB FETCHING MY IMAGES
-> LEAD TO `BAD CREDENTIALS` ERRORS ENTIRE NIGHT
-> MIGHT WANNA TRY IT TOMORROW
+1. make data of cards as context of app
+2. filter and sort of card data
