@@ -167,4 +167,13 @@ Challenge : "",
 
 ## TODO
 
-- take github api and store in context
+- added images to repos
+- added description to repos
+- added topics to repos
+
+- repos should now contain all the information i need to start rendering on client side
+
+> I SOMEHOW BLEW UP THE API LAST NIGHT
+> IT RAN INTO A RECURSIVE CALL TO GITHUB FETCHING MY IMAGES
+> LEAD TO `BAD CREDENTIALS` ERRORS ENTIRE NIGHT
+> MIGHT WANNA TRY IT TOMORROW

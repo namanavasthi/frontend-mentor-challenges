@@ -6,8 +6,10 @@ import { Card } from "./Card";
 import { useCONTEXT } from "./Context";
 
 const getGithubData = async () => {
+  const auth = `TOKEN ${process.env.REACT_APP_GITHUB_TOKEN}`;
+
   const HEADERS = {
-    Authorization: "Token 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",
+    Authorization: auth,
     Accept: "application/vnd.github.mercy-preview+json",
   };
 
@@ -23,7 +25,9 @@ const getGithubData = async () => {
 
   const result = await response.json();
 
-  return result.filter((repo) => repo.name.indexOf("frontend-mentor") >= 0);
+  const regex = /(frontend-mentor-)\d/g;
+
+  return result.filter((repo) => repo.name.match(regex));
 };
 
 export const Main = () => {
@@ -32,10 +36,7 @@ export const Main = () => {
   useEffect(() => {
     if (!DATA.length) {
       getGithubData()
-        .then((result) => {
-          console.log(result);
-          setDATA(result);
-        })
+        .then((result) => setDATA(result))
         .catch((e) => console.error(e));
     }
   }, [DATA.length, setDATA]);
