@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 
-export const DATA = [];
+const DATA = [];
+const CURR = [];
 
-export const CONTEXT = createContext({ DATA: DATA, setDATA: () => {} });
-export const useCONTEXT = () => useContext(CONTEXT);
+export const CONTEXT = createContext({ data: DATA, setData: (data) => {}, currData: CURR, setCurrData: (curr) => {} });
+export const useAppContext = () => useContext(CONTEXT);

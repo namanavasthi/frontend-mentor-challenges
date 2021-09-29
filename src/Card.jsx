@@ -1,21 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const getParsedDescription = (description) => {
-  if (description === "") return {};
-
-  let obj = {};
-
-  const pipeSeperated = description.split("|");
-
-  pipeSeperated.forEach((row) => {
-    const colonSeperated = row.split(":");
-    obj[colonSeperated[0].toLowerCase().trim()] = colonSeperated[1].trim();
-  });
-
-  return obj;
-};
-
-const getGithubData = async (url) => {
+const getGithubImage = async (url) => {
   const auth = `TOKEN ${process.env.REACT_APP_GITHUB_TOKEN}`;
 
   const HEADERS = {
@@ -68,38 +53,34 @@ const topicMapper = {
   TAILWINDCSS: "pink-600",
 };
 
-export const Card = ({ repo }) => {
+export const Card = ({ repo, index }) => {
   // id, name, created_at,
-  const { has_pages, homepage, html_url, topics, contents_url, description = "" } = repo;
+  const { has_pages, homepage, html_url, topics, contents_url, description = {} } = repo;
 
   const url = has_pages ? homepage : html_url;
-
-  const parsedDescription = getParsedDescription(description);
 
   const [thumbnail, setThumbnail] = useState(null);
 
   useEffect(() => {
-    if (!thumbnail) {
-      getGithubData(contents_url)
-        .then((res) => {
-          // from res i'd like to extract thumbnail
-          setThumbnail(getThumbnail(res)[0].download_url);
-        })
-        .catch((e) => console.error(e));
-    }
-  }, [contents_url, setThumbnail, thumbnail]);
+    getGithubImage(contents_url)
+      .then((res) => {
+        // from res i'd like to extract thumbnail
+        setThumbnail(getThumbnail(res)[0].download_url);
+      })
+      .catch((e) => console.error(e));
+  }, [repo, index, contents_url]);
 
-  const currentDifficulty = difficultyMapper[parsedDescription.difficulty];
+  const currentDifficulty = difficultyMapper[description.difficulty];
 
   return (
     <article className="w-full md:w-1/3 p-5">
       <div className="shadow-lg h-full relative pb-10">
-        <a href={url} target="_blank" className="w-full" rel="noreferrer">
-          <img src={thumbnail} alt="decorative" className="w-full" />
+        <a href={url} target="_blank" className="w-full block" rel="noreferrer">
+          <img src={thumbnail} alt="decorative" className="w-full" style={{ height: "283.36px" }} />
         </a>
         <div className="flex flex-col p-5 content-between">
           <a href={url} target="_blank" className="w-full" rel="noreferrer">
-            <h3 className="text-xl">{parsedDescription.name ?? ""}</h3>
+            <h3 className="text-xl">{description.name ?? ""}</h3>
           </a>
           <div className="uppercase flex flex-row justify-between items-center">
             <ul className="flex flex-row flex-wrap text-sm font-bold">
@@ -122,7 +103,7 @@ export const Card = ({ repo }) => {
               </span>
             </h4>
           </div>
-          <p className="text-sm text-gray-400">{parsedDescription.description ?? ""}</p>
+          <p className="text-sm text-gray-400">{description.description ?? ""}</p>
           <div className="flex flex-row absolute bottom-0 left-0 w-full py-5">
             <a href={html_url} target="_blank" className="text-md px-5" rel="noreferrer">
               CODE
