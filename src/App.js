@@ -48,6 +48,24 @@ const getParsedDescription = (description) => {
 const App = () => {
   const [data, setData] = useState([]);
   const [currData, setCurrData] = useState([]);
+  const [options, setOptions] = useState({ hideCompleted: false });
+
+  useEffect(() => {
+    // based on what options are selected we massage data
+    // and store it in currData
+
+    let temp = data;
+
+    if (data.length) {
+      if (options.hideCompleted) {
+        temp = temp.filter((repo) => repo.description.status !== "Complete");
+      } else {
+        temp = temp.filter((repo) => repo.description.status === "Complete");
+      }
+
+      setCurrData(temp);
+    }
+  }, [options, data]);
 
   useEffect(() => {
     if (!data.length) {
@@ -71,7 +89,7 @@ const App = () => {
 
   return (
     <div className="flex justify-center flex-col">
-      <CONTEXT.Provider value={{ data, setData, currData, setCurrData }}>
+      <CONTEXT.Provider value={{ data, setData, currData, setCurrData, options, setOptions }}>
         <Header />
         <Options />
         <Main />

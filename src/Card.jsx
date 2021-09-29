@@ -53,6 +53,11 @@ const topicMapper = {
   TAILWINDCSS: "pink-600",
 };
 
+const statusMapper = {
+  Complete: "",
+  Progress: "👷",
+};
+
 export const Card = ({ repo, index }) => {
   // id, name, created_at,
   const { has_pages, homepage, html_url, topics, contents_url, description = {} } = repo;
@@ -72,11 +77,19 @@ export const Card = ({ repo, index }) => {
 
   const currentDifficulty = difficultyMapper[description.difficulty];
 
+  const Status = () => {
+    const status = statusMapper[description.status];
+    return status !== "" ? (
+      <span className="absolute z-10 right-0 bottom-0 bg-indigo-600 px-3 py-1 text-white rounded-2xl mr-3 mb-3">{`in ${status}`}</span>
+    ) : null;
+  };
+
   return (
     <article className="w-full md:w-1/3 p-5">
       <div className="shadow-lg h-full relative pb-10">
-        <a href={url} target="_blank" className="w-full block" rel="noreferrer">
+        <a href={url} target="_blank" className="w-full block relative" rel="noreferrer">
           <img src={thumbnail} alt="decorative" className="w-full" style={{ height: "283.36px" }} />
+          <Status />
         </a>
         <div className="flex flex-col p-5 content-between">
           <a href={url} target="_blank" className="w-full" rel="noreferrer">
