@@ -4,6 +4,8 @@ import { FaGithub } from "react-icons/fa";
 
 import { CgLivePhoto } from "react-icons/cg";
 
+import { GiHalfDead } from "react-icons/gi";
+
 const getGithubImage = async (url) => {
   const auth = `TOKEN ${process.env.REACT_APP_GITHUB_TOKEN}`;
 
@@ -86,7 +88,7 @@ export const Card = ({ repo, index }) => {
         // from res i'd like to extract thumbnail
         setThumbnail(getThumbnail(res)[0].download_url);
       })
-      .catch((e) => console.error(e));
+      .catch((e) => setThumbnail(null));
   }, [repo, index, contents_url]);
 
   const currentDifficulty = difficultyMapper[description.difficulty];
@@ -102,7 +104,16 @@ export const Card = ({ repo, index }) => {
     <article className="w-full max-w-sm lg:max-w-md mx-auto md:w-1/2 xl:w-1/3 p-5">
       <div className="shadow-lg h-full relative pb-16 xl:pb-12">
         <a href={url} target="_blank" className="w-full block relative" rel="noreferrer">
-          <img src={thumbnail} alt="decorative" className="w-full" style={{ height: "283.36px" }} />
+          {thumbnail ? (
+            <img src={thumbnail} alt="decorative" className="w-full" style={{ height: "283.36px" }} />
+          ) : (
+            <div
+              className={`w-full flex justify-center items-center bg-${currentDifficulty.color}`}
+              style={{ height: "283.36px" }}
+            >
+              <GiHalfDead className="text-8xl text-white font-bold" />
+            </div>
+          )}
           <Status />
         </a>
         <div className="flex flex-col p-5 content-between">
