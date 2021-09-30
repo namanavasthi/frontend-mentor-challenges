@@ -51,12 +51,12 @@ const difficultyMapper = {
     tag: "INTERMEDIATE",
     color: "yellow-500",
   },
-  "3-ADVANCED": {
+  "4-ADVANCED": {
     level: 4,
     tag: "ADVANCED",
     color: "purple-500",
   },
-  "3-GURU": {
+  "5-GURU": {
     level: 5,
     tag: "GURU",
     color: "red-500",
@@ -86,7 +86,10 @@ export const Card = ({ repo, index }) => {
     getGithubImage(contents_url)
       .then((res) => {
         // from res i'd like to extract thumbnail
-        setThumbnail(getThumbnail(res)[0].download_url);
+
+        // be default thumbnails have size 0
+        if (getThumbnail(res)[0].size !== 0) setThumbnail(getThumbnail(res)[0].download_url);
+        else setThumbnail(null);
       })
       .catch((e) => setThumbnail(null));
   }, [repo, index, contents_url]);
@@ -96,7 +99,7 @@ export const Card = ({ repo, index }) => {
   const Status = () => {
     const status = statusMapper[description.status];
     return status !== "" ? (
-      <span className="absolute z-10 right-0 bottom-0 bg-indigo-600 px-3 py-1 text-white rounded-2xl mr-3 mb-3">{`in ${status}`}</span>
+      <span className="absolute z-10 right-0 bottom-0 bg-black bg-opacity-50 px-3 py-1 text-white rounded-2xl mr-3 mb-3">{`in ${status}`}</span>
     ) : null;
   };
 

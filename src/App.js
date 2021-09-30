@@ -59,8 +59,6 @@ const App = () => {
     if (data.length) {
       if (options.hideCompleted) {
         temp = temp.filter((repo) => repo.description.status !== "Complete");
-      } else {
-        temp = temp.filter((repo) => repo.description.status === "Complete");
       }
 
       let filterTemp = [];
