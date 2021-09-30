@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+import { FaGithub } from "react-icons/fa";
+
+import { CgLivePhoto } from "react-icons/cg";
+
 const getGithubImage = async (url) => {
   const auth = `TOKEN ${process.env.REACT_APP_GITHUB_TOKEN}`;
 
@@ -85,8 +89,8 @@ export const Card = ({ repo, index }) => {
   };
 
   return (
-    <article className="w-full md:w-1/3 p-5">
-      <div className="shadow-lg h-full relative pb-10">
+    <article className="w-full max-w-sm lg:max-w-md mx-auto md:w-1/2 xl:w-1/3 p-5">
+      <div className="shadow-lg h-full relative pb-16 xl:pb-12">
         <a href={url} target="_blank" className="w-full block relative" rel="noreferrer">
           <img src={thumbnail} alt="decorative" className="w-full" style={{ height: "283.36px" }} />
           <Status />
@@ -103,7 +107,7 @@ export const Card = ({ repo, index }) => {
                 </li>
               ))}
             </ul>
-            <h4 className="py-4 text-md font-bold">
+            <h4 className="py-4 text-sm lg:text-md font-bold">
               <span
                 className={`text-white font-bold bg-${currentDifficulty.color} rounded-l-md border border-${currentDifficulty.color} p-1`}
               >
@@ -117,12 +121,24 @@ export const Card = ({ repo, index }) => {
             </h4>
           </div>
           <p className="text-sm text-gray-400">{description.description ?? ""}</p>
-          <div className="flex flex-row absolute bottom-0 left-0 w-full py-5">
-            <a href={html_url} target="_blank" className="text-md px-5" rel="noreferrer">
-              CODE
+          <div className="flex flex-row md:justify-center md:items-center absolute bottom-0 left-0 w-full py-5">
+            <a
+              href={html_url}
+              target="_blank"
+              className="rounded-lg md:w-1/2 text-md px-5 py-3 md:mx-10 flex flex-row justify-center items-center focus:bg-github hover:bg-github focus:text-white hover:text-white"
+              rel="noreferrer"
+            >
+              <span className="uppercase pr-2">code</span>
+              <FaGithub />
             </a>
-            <a href={url} target="_blank" className="text-md px-5" rel="noreferrer">
-              LIVE DEMO
+            <a
+              href={url}
+              target="_blank"
+              className="rounded-lg md:w-1/2 text-md px-5 py-3 md:mx-10 flex flex-row justify-center items-center focus:bg-red-600 hover:bg-red-600 focus:text-white hover:text-white"
+              rel="noreferrer"
+            >
+              <span className="uppercase pr-2">demo</span>
+              <CgLivePhoto />
             </a>
           </div>
         </div>

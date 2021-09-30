@@ -6,6 +6,9 @@ module.exports = {
       borderRadius: {
         1: "1px",
       },
+      colors: {
+        github: "#333333",
+      },
     },
   },
   variants: {

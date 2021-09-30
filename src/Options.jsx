@@ -69,9 +69,9 @@ export const Options = () => {
 
   return (
     <Wrapper>
-      <nav className="flex flex-row justify-end items-stretch px-5 tracking-tighter text-sm">
+      <nav className="flex flex-wrap justify-center md:flex-nowrap md:flex-row md:justify-end items-stretch md:px-5  tracking-tighter text-sm">
         <button
-          className="px-5 py-5 border-l-2 border-r-2 border-gray-300 flex flex-row justify-center items-center"
+          className="px-5 py-5 border-b-2 md:border-b-0 border-l-2 border-r-2 border-gray-300 flex flex-row justify-center items-center w-full md:w-auto"
           onClick={() => {
             const temp = {};
             Object.assign(temp, options, { hideCompleted: !options.hideCompleted });
@@ -88,75 +88,77 @@ export const Options = () => {
           <span className="capitalize pl-3">hide completed</span>
         </button>
 
-        <div className="relative">
-          <button
-            onClick={() => {
-              if (!sortOpen && filterOpen) {
-                setFilterOpen(false);
-              }
+        <div className="flex flex-row">
+          <div className="relative">
+            <button
+              onClick={() => {
+                if (!sortOpen && filterOpen) {
+                  setFilterOpen(false);
+                }
 
-              setSortOpen(!sortOpen);
-            }}
-            className="px-5 py-5 border-r-2 border-gray-300 uppercase flex flex-row justify-center items-center w-full h-full"
-          >
-            sort by <FaChevronDown className={`ml-3 ${sortOpen ? "transform rotate-180" : ""}`} />
-          </button>
-          <div className={`options absolute top-100 z-10 bg-white left-0 ${sortOpen ? "block" : "hidden"}`}>
-            <ul className="flex flex-col items-start justify-center w-60">
-              <ListItem text="most recent" active={options.sortBy === "recent"} order="recent" />
-              <ListItem text="Difficulty (easier first)" active={options.sortBy === "diffAsc"} order="diffAsc" />
-              <ListItem
-                text="Difficulty (harder first)"
-                active={options.sortBy === "diffDesc"}
-                last={true}
-                order="diffDesc"
-              />
-            </ul>
+                setSortOpen(!sortOpen);
+              }}
+              className="px-5 py-5 border-l-2 md:border-l-0 border-r-2 border-gray-300 uppercase flex flex-row justify-center items-center w-full h-full"
+            >
+              sort by <FaChevronDown className={`ml-3 ${sortOpen ? "transform rotate-180" : ""}`} />
+            </button>
+            <div className={`options absolute top-100 z-10 bg-white left-0 ${sortOpen ? "block" : "hidden"}`}>
+              <ul className="flex flex-col items-start justify-center w-60">
+                <ListItem text="most recent" active={options.sortBy === "recent"} order="recent" />
+                <ListItem text="Difficulty (easier first)" active={options.sortBy === "diffAsc"} order="diffAsc" />
+                <ListItem
+                  text="Difficulty (harder first)"
+                  active={options.sortBy === "diffDesc"}
+                  last={true}
+                  order="diffDesc"
+                />
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div className="relative">
-          <button
-            onClick={() => {
-              if (sortOpen && !filterOpen) {
-                setSortOpen(false);
-              }
+          <div className="relative">
+            <button
+              onClick={() => {
+                if (sortOpen && !filterOpen) {
+                  setSortOpen(false);
+                }
 
-              setFilterOpen(!filterOpen);
-            }}
-            className="px-5 py-5 border-r-2 border-gray-300 uppercase flex flex-row justify-center items-center w-full h-full"
-          >
-            filter by <FaChevronDown className={`ml-3 ${filterOpen ? "transform rotate-180" : ""}`} />
-          </button>
-          <div className={`options absolute top-100 z-10 bg-white left-0 ${filterOpen ? "block" : "hidden"}`}>
-            <ul className="flex flex-col items-start justify-center w-52">
-              <ListItemSort
-                text="newbie"
-                active={options.filter.indexOf("newbie".toUpperCase()) > -1}
-                filter="newbie"
-              />
-              <ListItemSort
-                text="junior"
-                active={options.filter.indexOf("junior".toUpperCase()) > -1}
-                filter="junior"
-              />
-              <ListItemSort
-                text="intermediate"
-                active={options.filter.indexOf("intermediate".toUpperCase()) > -1}
-                filter="intermediate"
-              />
-              <ListItemSort
-                text="advanced"
-                active={options.filter.indexOf("advanced".toUpperCase()) > -1}
-                filter="advanced"
-              />
-              <ListItemSort
-                text="guru"
-                active={options.filter.indexOf("guru".toUpperCase()) > -1}
-                filter="guru"
-                last={true}
-              />
-            </ul>
+                setFilterOpen(!filterOpen);
+              }}
+              className="px-5 py-5 border-r-2 border-gray-300 uppercase flex flex-row justify-center items-center w-full h-full"
+            >
+              filter by <FaChevronDown className={`ml-3 ${filterOpen ? "transform rotate-180" : ""}`} />
+            </button>
+            <div className={`options absolute top-100 z-10 bg-white left-0 ${filterOpen ? "block" : "hidden"}`}>
+              <ul className="flex flex-col items-start justify-center w-52">
+                <ListItemSort
+                  text="newbie"
+                  active={options.filter.indexOf("newbie".toUpperCase()) > -1}
+                  filter="newbie"
+                />
+                <ListItemSort
+                  text="junior"
+                  active={options.filter.indexOf("junior".toUpperCase()) > -1}
+                  filter="junior"
+                />
+                <ListItemSort
+                  text="intermediate"
+                  active={options.filter.indexOf("intermediate".toUpperCase()) > -1}
+                  filter="intermediate"
+                />
+                <ListItemSort
+                  text="advanced"
+                  active={options.filter.indexOf("advanced".toUpperCase()) > -1}
+                  filter="advanced"
+                />
+                <ListItemSort
+                  text="guru"
+                  active={options.filter.indexOf("guru".toUpperCase()) > -1}
+                  filter="guru"
+                  last={true}
+                />
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
