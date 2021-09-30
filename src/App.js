@@ -23,6 +23,10 @@ const getGithubData = async () => {
     headers: HEADERS,
   });
 
+  console.log(HEADERS);
+
+  console.log(response);
+
   const result = await response.json();
 
   const regex = /(frontend-mentor-)\d/g;
@@ -109,7 +113,7 @@ const App = () => {
           setData(result);
           setCurrData(result);
         })
-        .catch((e) => console.error(e));
+        .catch((e) => console.error(`error from github api ${e}`));
     }
   }, [data.length, setData]);
 
