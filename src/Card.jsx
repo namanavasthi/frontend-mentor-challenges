@@ -49,6 +49,16 @@ const difficultyMapper = {
     tag: "INTERMEDIATE",
     color: "yellow-500",
   },
+  "3-ADVANCED": {
+    level: 4,
+    tag: "ADVANCED",
+    color: "purple-500",
+  },
+  "3-GURU": {
+    level: 5,
+    tag: "GURU",
+    color: "red-500",
+  },
 };
 
 const topicMapper = {

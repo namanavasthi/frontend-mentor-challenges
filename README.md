@@ -176,3 +176,10 @@ Challenge : "",
 
 1. make data of cards as context of app
 2. filter and sort of card data
+
+## GH-PAGES
+
+alright, so gh-pages and github doesn't have a clean solution to add tokens as part of ci/cd pipeline, so i ended up hosting on vercel :/
+cant get any more straightforward. go create app, add token (gets encrypted by default) and run build on commits to `main`. root
+[here's the vercel url for this app](https://frontend-mentor-challenges-opal.vercel.app/)
+might get custom domain in future, would i ? not really.
