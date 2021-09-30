@@ -4,6 +4,8 @@ const DATA = [];
 const CURR = [];
 const OPTIONS = {
   hideCompleted: false,
+  sortBy: "recent",
+  filter: [],
 };
 
 export const CONTEXT = createContext({

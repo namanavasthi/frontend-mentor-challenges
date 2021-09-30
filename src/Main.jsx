@@ -9,12 +9,7 @@ export const Main = () => {
   return (
     <main>
       <Wrapper className="flex flex-col md:flex-row md:flex-wrap md:justify-center md:items-stretch">
-        {currData.length
-          ? currData.map((repo, i) => {
-              console.log(`repo = ${repo.name}`);
-              return <Card repo={repo} key={i} index={i} />;
-            })
-          : null}
+        {currData.length ? currData.map((repo, i) => <Card repo={repo} key={i} index={i} />) : null}
       </Wrapper>
     </main>
   );
